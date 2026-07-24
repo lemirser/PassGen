@@ -16,7 +16,8 @@ struct ContentView: View {
     @State private var passwordLength : Int = 16
     @State private var lengthText = "16"
     
-    @State private var lowerOptions: String = "abcdefghijklmnopqrstuvwxyz"
+    static let lowerOptions = "abcdefghijklmnopqrstuvwxyz"
+    @State private var defaultPass: String = lowerOptions
     @State private var upperOptions: String = "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
     @State private var numberOptions: String = "0123456789"
     @State private var specialOptions: String = "!@#$%^&*()-_=+"
@@ -59,7 +60,7 @@ struct ContentView: View {
     
     var body: some View {
         VStack {
-            Text(String(lowerOptions.prefix(passwordLength)))
+            Text(String(defaultPass.prefix(passwordLength)))
             Text("Strength: strong")
             
             TextField("Length", text:$lengthText)
@@ -79,7 +80,7 @@ struct ContentView: View {
                 .onChange(of: withCapital) {oldValue, newValue in
                     if newValue {
                         if let randomChar = upperOptions.randomElement() {
-                            lowerOptions.append(randomChar)
+                            defaultPass.append(randomChar)
                             }
                         }
                     }
@@ -88,7 +89,7 @@ struct ContentView: View {
                 .onChange(of: withNumbers) {oldValue, newValue in
                 if newValue {
                     if let randomChar = numberOptions.randomElement() {
-                        lowerOptions.append(randomChar)
+                        defaultPass.append(randomChar)
                         }
                     }
                 }
@@ -97,7 +98,7 @@ struct ContentView: View {
                 .onChange(of: withSymbols) {oldValue, newValue in
                 if newValue {
                     if let randomChar = specialOptions.randomElement() {
-                        lowerOptions.append(randomChar)
+                        defaultPass.append(randomChar)
                         }
                     }
                 }
