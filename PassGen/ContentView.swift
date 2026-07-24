@@ -19,6 +19,7 @@ struct ContentView: View {
     @State private var lowerOptions: String = "abcdefghijklmnopqrstuvwxyz"
     @State private var upperOptions: String = "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
     @State private var numberOptions: String = "0123456789"
+    @State private var specialOptions: String = "!@#$%^&*()-_=+"
     
     var capitalBinding: Binding<Bool> {
         Binding(
@@ -93,6 +94,13 @@ struct ContentView: View {
                 }
             
             Toggle("Symbols", isOn: symbolsBinding)
+                .onChange(of: withSymbols) {oldValue, newValue in
+                if newValue {
+                    if let randomChar = specialOptions.randomElement() {
+                        lowerOptions.append(randomChar)
+                        }
+                    }
+                }
             
             Button("Copy"){}
             Button("Regenerate"){}
