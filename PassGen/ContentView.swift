@@ -59,7 +59,7 @@ struct ContentView: View {
     
     var body: some View {
         VStack {
-            Text(lowerOptions)
+            Text(String(lowerOptions.prefix(passwordLength)))
             Text("Strength: strong")
             
             TextField("Length", text:$lengthText)
