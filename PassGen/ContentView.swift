@@ -16,7 +16,8 @@ struct ContentView: View {
     @State private var passwordLength : Int = 16
     @State private var lengthText = "16"
     
-    let lowercase = "abcdefghijklmnopqrstuvwxyz"
+    @State private var lowerOptions: String = "abcdefghijklmnopqrstuvwxyz"
+    @State private var upperOptions: String = "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
     
     var capitalBinding: Binding<Bool> {
         Binding(
@@ -56,7 +57,7 @@ struct ContentView: View {
     
     var body: some View {
         VStack {
-            Text(lowercase)
+            Text(lowerOptions)
             Text("Strength: strong")
             
             TextField("Length", text:$lengthText)
@@ -73,6 +74,14 @@ struct ContentView: View {
                     }
             
             Toggle("Capital Letters", isOn: capitalBinding)
+                .onChange(of: withCapital) {oldValue, newValue in
+                    if newValue {
+                        if let randomChar = upperOptions.randomElement() {
+                            lowerOptions.append(randomChar)
+                            }
+                        }
+                    }
+                    
             Toggle("Numbers", isOn: numbersBinding)
             Toggle("Symbols", isOn: symbolsBinding)
             
