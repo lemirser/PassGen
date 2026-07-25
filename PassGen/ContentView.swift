@@ -114,6 +114,26 @@ struct ContentView: View {
         }
         .padding()
     }
+    
+    func generatePassword() -> String {
+        
+        var requiredChars: [Character] = []
+        var pool = ContentView.lowerOptions
+        
+        if let randomChar = ContentView.lowerOptions.randomElement(){
+            requiredChars.append(randomChar)
+        }
+        
+        if withCapital {
+            if let randomChar = upperOptions.randomElement() {
+                requiredChars.append(randomChar)
+            }
+            pool += upperOptions
+        }
+        
+        return String(requiredChars)
+    }
+    
 }
 
 #Preview {
