@@ -79,37 +79,10 @@ struct ContentView: View {
                     }
             
             Toggle("Capital Letters", isOn: capitalBinding)
-                .onChange(of: withCapital) {oldValue, newValue in
-                    if newValue {
-                          if let randomIndex = defaultPass.indices.randomElement() {
-                              let randomChar = upperOptions.shuffled().prefix(passwordLength-2)
-                               defaultPass.replaceSubrange(randomIndex...randomIndex, with: String(randomChar))
-                            }
-                        }
-                    else {defaultPass.removeAll{$0.isUppercase}}
-                    }
                     
             Toggle("Numbers", isOn: numbersBinding)
-                .onChange(of: withNumbers) {oldValue, newValue in
-                if newValue {
-                    if let randomIndex = defaultPass.indices.randomElement() {
-                        let randomChar = numberOptions.shuffled().prefix(passwordLength-2)
-                         defaultPass.replaceSubrange(randomIndex...randomIndex, with: String(randomChar))
-                      }
-                    }
-                else {defaultPass.removeAll {$0.isNumber} }
-                }
             
             Toggle("Symbols", isOn: symbolsBinding)
-                .onChange(of: withSymbols) {oldValue, newValue in
-                if newValue {
-                    if let randomIndex = defaultPass.indices.randomElement() {
-                        let randomChar = specialOptions.shuffled().prefix(passwordLength-2)
-                         defaultPass.replaceSubrange(randomIndex...randomIndex, with: String(randomChar))
-                      }
-                    }
-                else {defaultPass.removeAll {$0.isPunctuation || $0.isSymbol} }
-                }
             
             Button("Copy"){}
             Button("Regenerate"){}
