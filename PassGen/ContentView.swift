@@ -90,10 +90,12 @@ struct ContentView: View {
             Toggle("Numbers", isOn: numbersBinding)
                 .onChange(of: withNumbers) {oldValue, newValue in
                 if newValue {
-                    if let randomChar = numberOptions.randomElement() {
-                        defaultPass.append(randomChar)
-                        }
+                    if let randomIndex = defaultPass.indices.randomElement() {
+                        let randomChar = numberOptions.shuffled().prefix(passwordLength-2)
+                         defaultPass.replaceSubrange(randomIndex...randomIndex, with: String(randomChar))
+                      }
                     }
+                else {defaultPass.removeAll {$0.isNumber} }
                 }
             
             Toggle("Symbols", isOn: symbolsBinding)
