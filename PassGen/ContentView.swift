@@ -60,7 +60,7 @@ struct ContentView: View {
     
     var body: some View {
         VStack {
-            Text(String(defaultPass.prefix(passwordLength)))
+            Text(String(defaultPass.shuffled().prefix(passwordLength)))
             Text("Strength: strong")
             
             TextField("Length", text:$lengthText)
