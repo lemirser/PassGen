@@ -101,10 +101,12 @@ struct ContentView: View {
             Toggle("Symbols", isOn: symbolsBinding)
                 .onChange(of: withSymbols) {oldValue, newValue in
                 if newValue {
-                    if let randomChar = specialOptions.randomElement() {
-                        defaultPass.append(randomChar)
-                        }
+                    if let randomIndex = defaultPass.indices.randomElement() {
+                        let randomChar = specialOptions.shuffled().prefix(passwordLength-2)
+                         defaultPass.replaceSubrange(randomIndex...randomIndex, with: String(randomChar))
+                      }
                     }
+                else {defaultPass.removeAll {$0.isPunctuation || $0.isSymbol} }
                 }
             
             Button("Copy"){}
