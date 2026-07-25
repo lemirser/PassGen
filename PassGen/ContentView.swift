@@ -85,7 +85,9 @@ struct ContentView: View {
             Toggle("Symbols", isOn: symbolsBinding)
             
             Button("Copy"){}
-            Button("Regenerate"){}
+            Button("Regenerate") {
+                generatedPassword = generatePassword()
+            }
         }
         .padding()
         .onAppear() {
