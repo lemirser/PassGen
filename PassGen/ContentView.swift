@@ -84,6 +84,7 @@ struct ContentView: View {
                                defaultPass.replaceSubrange(randomIndex...randomIndex, with: String(randomChar))
                             }
                         }
+                    else {defaultPass.removeAll{$0.isUppercase}}
                     }
                     
             Toggle("Numbers", isOn: numbersBinding)
