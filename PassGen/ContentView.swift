@@ -22,6 +22,8 @@ struct ContentView: View {
     @State private var numberOptions: String = "0123456789"
     @State private var specialOptions: String = "!@#$%^&*()-_=+"
     
+    @State private var generatedPassword: String = ""
+    
     var capitalBinding: Binding<Bool> {
         Binding(
             get:{withCapital},
@@ -60,7 +62,7 @@ struct ContentView: View {
     
     var body: some View {
         VStack {
-            Text(String(defaultPass.shuffled().prefix(passwordLength)))
+            Text(generatedPassword)
             Text("Strength: strong")
             
             TextField("Length", text:$lengthText)
@@ -113,6 +115,9 @@ struct ContentView: View {
             Button("Regenerate"){}
         }
         .padding()
+        .onAppear() {
+            generatedPassword = generatePassword()
+        }
     }
     
     func generatePassword() -> String {
