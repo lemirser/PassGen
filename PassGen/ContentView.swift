@@ -145,6 +145,14 @@ struct ContentView: View {
             pool += specialOptions
         }
         
+        let remainingLength = passwordLength - requiredChars.count
+        
+        for _ in 0..<remainingLength {
+            if let randomChar = pool.randomElement() {
+                requiredChars.append(randomChar)
+            }
+        }
+        
         return String(requiredChars)
     }
     
