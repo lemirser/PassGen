@@ -52,6 +52,7 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 54DFE592301177160077E8A8 /* Build configuration list for PBXNativeTarget "PassGen" */;
 			buildPhases = (
+				54CCA08630142F7D005192D9 /* ShellScript */,
 				54DFE583301177150077E8A8 /* Sources */,
 				54DFE584301177150077E8A8 /* Frameworks */,
 				54DFE585301177150077E8A8 /* Resources */,
@@ -113,6 +114,27 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		54CCA08630142F7D005192D9 /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			alwaysOutOfDate = 1;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "# Type a script or drag a script file from your workspace to insert its path.\nxcrun swift-format --in-place --recursive \"$SRCROOT\"\n";
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		54DFE583301177150077E8A8 /* Sources */ = {

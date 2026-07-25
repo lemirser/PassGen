@@ -79,8 +79,9 @@ struct ContentView: View {
             Toggle("Capital Letters", isOn: capitalBinding)
                 .onChange(of: withCapital) {oldValue, newValue in
                     if newValue {
-                        if let randomChar = upperOptions.randomElement() {
-                            defaultPass.append(randomChar)
+                          if let randomIndex = defaultPass.indices.randomElement() {
+                              let randomChar = upperOptions.shuffled().prefix(passwordLength-2)
+                               defaultPass.replaceSubrange(randomIndex...randomIndex, with: String(randomChar))
                             }
                         }
                     }
