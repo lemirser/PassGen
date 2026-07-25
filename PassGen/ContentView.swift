@@ -153,7 +153,9 @@ struct ContentView: View {
             }
         }
         
-        return String(requiredChars)
+        let shuffledChars = requiredChars.shuffled()
+        return String(shuffledChars)
+        
     }
     
 }
