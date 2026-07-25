@@ -131,6 +131,12 @@ struct ContentView: View {
             pool += upperOptions
         }
         
+        if withNumbers {
+            if let randomChar = numberOptions.randomElement() {
+                requiredChars.append(randomChar)
+            }
+        }
+        
         return String(requiredChars)
     }
     
