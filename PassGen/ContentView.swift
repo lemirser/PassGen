@@ -135,6 +135,14 @@ struct ContentView: View {
             if let randomChar = numberOptions.randomElement() {
                 requiredChars.append(randomChar)
             }
+            pool += numberOptions
+        }
+        
+        if withSymbols {
+            if let randomChar = specialOptions.randomElement() {
+                requiredChars.append(randomChar)
+            }
+            pool += specialOptions
         }
         
         return String(requiredChars)
