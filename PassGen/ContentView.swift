@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import AppKit
 
 
 // Add functionality to set the menubar as active when the toolbar is open
@@ -91,7 +92,11 @@ struct ContentView: View {
                 oldValue, newValue in generatedPassword = generatePassword()
             }
             
-            Button("Copy"){}
+            Button("Copy"){
+                NSPasteboard.general.clearContents()
+                NSPasteboard.general.setString(generatedPassword, forType: .string)
+            }
+            
             Button("Regenerate") {
                 generatedPassword = generatePassword()
             }
