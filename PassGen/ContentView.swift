@@ -10,9 +10,9 @@ import SwiftUI
 
 // Add functionality to set the menubar as active when the toolbar is open
 struct ContentView: View {
-    @State private var withCapital = false
-    @State private var withNumbers = false
-    @State private var withSymbols = false
+    @State private var withCapital = true
+    @State private var withNumbers = true
+    @State private var withSymbols = true
     @State private var passwordLength : Int = 16
     @State private var lengthText = "16"
     
@@ -76,6 +76,7 @@ struct ContentView: View {
                     if value > 64 { value = 64 }
                     passwordLength = value
                     lengthText = String(value)
+                    generatedPassword = generatePassword()
                     }
             
             Toggle("Capital Letters", isOn: capitalBinding)
