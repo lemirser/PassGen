@@ -79,11 +79,17 @@ struct ContentView: View {
                     generatedPassword = generatePassword()
                     }
             
-            Toggle("Capital Letters", isOn: capitalBinding)
+            Toggle("Capital Letters", isOn: capitalBinding).onChange(of: withCapital) {
+                oldValue, newValue in generatedPassword = generatePassword()
+            }
                     
-            Toggle("Numbers", isOn: numbersBinding)
+            Toggle("Numbers", isOn: numbersBinding).onChange(of: withNumbers) {
+                oldValue, newValue in generatedPassword = generatePassword()
+            }
             
-            Toggle("Symbols", isOn: symbolsBinding)
+            Toggle("Symbols", isOn: symbolsBinding).onChange(of: withSymbols) {
+                oldValue, newValue in generatedPassword = generatePassword()
+            }
             
             Button("Copy"){}
             Button("Regenerate") {
