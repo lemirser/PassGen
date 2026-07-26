@@ -17,7 +17,6 @@ struct ContentView: View {
     @State private var lengthText = "16"
     
     static let lowerOptions = "abcdefghijklmnopqrstuvwxyz"
-    @State private var defaultPass: String = lowerOptions
     @State private var upperOptions: String = "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
     @State private var numberOptions: String = "0123456789"
     @State private var specialOptions: String = "!@#$%^&*()-_=+"
@@ -26,6 +25,8 @@ struct ContentView: View {
     
     @State private var clipboardTimer: Timer?
     @State private var copiedPassword: String = ""
+    
+    @State private var currentEntropy: Double = 0
     
     var capitalBinding: Binding<Bool> {
         Binding(
