@@ -9,7 +9,6 @@ import SwiftUI
 import AppKit
 
 
-// Add functionality to set the menubar as active when the toolbar is open
 struct ContentView: View {
     @State private var withCapital = true
     @State private var withNumbers = true
@@ -66,10 +65,11 @@ struct ContentView: View {
     
     var body: some View {
         VStack {
-            Text(formattedPassword())
+            Text(charColor())
                 .multilineTextAlignment(.center)
                 .fixedSize(horizontal: false, vertical: true)
-            Text("Strength: \(strengthLabel())")
+            
+            Text("Strength: \(strengthLabel())").padding(2)
             
             ProgressView(value: strengthPercentage()/100)
                 .tint(strengthColor())
@@ -263,8 +263,38 @@ struct ContentView: View {
         } else {
             return .green
         }
-
     }
+    
+    func charColor() -> AttributedString {
+        let formattedChar = formattedPassword()
+        let upperChecker = upperOptions
+        let numberChecker = numberOptions
+        let specialChecker = specialOptions
+        
+        var result = AttributedString()
+        
+        for char in formattedChar {
+            // Wrap the single character into an AttributedString
+            var styledChar = AttributedString(String(char))
+            
+            // Determine the foreground color based on character set matching
+            if upperChecker.contains(char) {
+                styledChar.foregroundColor = .green
+            } else if numberChecker.contains(char) {
+                styledChar.foregroundColor = .yellow
+            } else if specialChecker.contains(char) {
+                styledChar.foregroundColor = .red
+            } else {
+                // Retain default color
+                styledChar.foregroundColor = .primary
+            }
+            
+            result.append(styledChar)
+        }
+        
+        return result
+    }
+    
 }
 
 #Preview {
