@@ -211,6 +211,14 @@ struct ContentView: View {
         return strength
     }
     
+    func strengthPercentage() -> Double {
+        let entropy = calculateEntropy()
+        
+        let percentage = min((entropy / 100) * 100,100)
+        
+        return percentage
+    }
+    
 }
 
 #Preview {
