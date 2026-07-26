@@ -72,6 +72,7 @@ struct ContentView: View {
             Text("Strength: \(strengthLabel())")
             
             ProgressView(value: strengthPercentage()/100)
+                .tint(strengthColor())
             
             TextField("Length", text:$lengthText)
                 .onChange(of: lengthText, {oldValue,
@@ -241,6 +242,21 @@ struct ContentView: View {
         
         // Stack chunks line-by-line with newlines
         return allChunks.joined(separator: "\n")
+    }
+    
+    func strengthColor() -> Color {
+        let label = strengthLabel()
+        
+        if label == "Weak" {
+            return .red
+        } else if label == "Fair" {
+            return .yellow
+        } else if label == "Strong" {
+            return Color(red: 0.55, green: 0.82, blue: 0.39)
+        } else {
+            return .green
+        }
+
     }
 }
 
