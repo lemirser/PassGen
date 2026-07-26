@@ -66,7 +66,9 @@ struct ContentView: View {
     
     var body: some View {
         VStack {
-            Text(generatedPassword)
+            Text(formattedPassword())
+                .multilineTextAlignment(.center)
+                .fixedSize(horizontal: false, vertical: true)
             Text("Strength: \(strengthLabel())")
             
             TextField("Length", text:$lengthText)
@@ -219,6 +221,25 @@ struct ContentView: View {
         return percentage
     }
     
+    func formattedPassword() -> String {
+        let charList = generatedPassword
+        let stepSize = 20
+        
+        // Step through character counts in increments of 20
+        let allChunks = stride(from: 0, to: charList.count, by: stepSize).map { i in
+            // Convert starting integer to a valid String.Index position
+            let start = charList.index(charList.startIndex, offsetBy: i)
+            
+            // Find ending index, capping at endIndex so it doesn't run off the end
+            let end = charList.index(start, offsetBy: stepSize, limitedBy: charList.endIndex) ?? charList.endIndex
+            
+            // Slice using valid String.Index range
+            return String(charList[start..<end])
+        }
+        
+        // Stack chunks line-by-line with newlines
+        return allChunks.joined(separator: "\n")
+    }
 }
 
 #Preview {
