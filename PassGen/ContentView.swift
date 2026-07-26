@@ -71,6 +71,8 @@ struct ContentView: View {
                 .fixedSize(horizontal: false, vertical: true)
             Text("Strength: \(strengthLabel())")
             
+            ProgressView(value: strengthPercentage()/100)
+            
             TextField("Length", text:$lengthText)
                 .onChange(of: lengthText, {oldValue,
                     newValue in lengthText = newValue.filter {$0.isNumber}
