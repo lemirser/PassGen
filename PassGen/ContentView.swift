@@ -103,26 +103,28 @@ struct ContentView: View {
             }
             .padding()
             
-            Button("Copy"){
-                NSPasteboard.general.clearContents()
-                NSPasteboard.general.setString(generatedPassword, forType: .string)
-                
-                copiedPassword = generatedPassword
-                
-                clipboardTimer?.invalidate()
-                
-                // Clear clipboard after 90s if the value in the clipboard is still the copied password
-                // Reset timer every click on the Copy button
-                clipboardTimer = Timer.scheduledTimer(withTimeInterval: 90, repeats: false) {
-                    _ in let pasteboardContents = NSPasteboard.general.string(forType: .string)
-                    if pasteboardContents == copiedPassword {
-                        NSPasteboard.general.clearContents()
+            HStack(){
+                Button("Copy"){
+                    NSPasteboard.general.clearContents()
+                    NSPasteboard.general.setString(generatedPassword, forType: .string)
+                    
+                    copiedPassword = generatedPassword
+                    
+                    clipboardTimer?.invalidate()
+                    
+                    // Clear clipboard after 90s if the value in the clipboard is still the copied password
+                    // Reset timer every click on the Copy button
+                    clipboardTimer = Timer.scheduledTimer(withTimeInterval: 90, repeats: false) {
+                        _ in let pasteboardContents = NSPasteboard.general.string(forType: .string)
+                        if pasteboardContents == copiedPassword {
+                            NSPasteboard.general.clearContents()
+                        }
                     }
                 }
-            }
-            
-            Button("Regenerate") {
-                generatedPassword = generatePassword()
+                
+                Button("Regenerate") {
+                    generatedPassword = generatePassword()
+                }
             }
         }
         .padding()
