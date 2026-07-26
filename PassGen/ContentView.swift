@@ -67,7 +67,7 @@ struct ContentView: View {
     var body: some View {
         VStack {
             Text(generatedPassword)
-            Text("Strength: strong")
+            Text("Strength: \(strengthLabel())")
             
             TextField("Length", text:$lengthText)
                 .onChange(of: lengthText, {oldValue,
@@ -191,6 +191,24 @@ struct ContentView: View {
         let entropy = Double(passwordLength) * log2(Double(poolSize))
         
         return entropy
+    }
+    
+    func strengthLabel() -> String {
+        
+        let entropy = calculateEntropy()
+        var strength = ""
+        
+        if entropy <= 40 {
+            strength = "Weak"
+        } else if entropy <= 60 {
+            strength = "Fair"
+        } else if entropy <= 100 {
+            strength = "Strong"
+        } else {
+            strength = "Very Strong"
+        }
+        
+        return strength
     }
     
 }
