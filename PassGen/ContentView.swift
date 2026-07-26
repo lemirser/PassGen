@@ -185,6 +185,14 @@ struct ContentView: View {
         return poolSize
     }
     
+    func calculateEntropy() -> Double {
+        
+        let poolSize = calculatePoolSize()
+        let entropy = Double(passwordLength) * log2(Double(poolSize))
+        
+        return entropy
+    }
+    
 }
 
 #Preview {
