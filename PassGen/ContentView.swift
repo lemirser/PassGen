@@ -75,6 +75,8 @@ struct ContentView: View {
                 .tint(strengthColor())
             
             TextField("Length", text:$lengthText)
+                .frame(width: 60)
+                .multilineTextAlignment(.center)
                 .onChange(of: lengthText, {oldValue,
                     newValue in lengthText = newValue.filter {$0.isNumber}
                 }
