@@ -16,7 +16,7 @@ struct ContentView: View {
     @State private var passwordLength : Int = 16
     @State private var lengthText = "16"
     
-    static let lowerOptions = "abcdefghijklmnopqrstuvwxyz"
+    @State private var lowerOptions: String = "abcdefghijklmnopqrstuvwxyz"
     @State private var upperOptions: String = "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
     @State private var numberOptions: String = "0123456789"
     @State private var specialOptions: String = "!@#$%^&*()-_=+"
@@ -145,9 +145,9 @@ struct ContentView: View {
     func generatePassword() -> String {
         
         var requiredChars: [Character] = []
-        var pool = ContentView.lowerOptions
+        var pool = lowerOptions
         
-        if let randomChar = ContentView.lowerOptions.randomElement(){
+        if let randomChar = lowerOptions.randomElement(){
             requiredChars.append(randomChar)
         }
         
@@ -187,7 +187,7 @@ struct ContentView: View {
     
     func calculatePoolSize() -> Int {
         
-        var poolSize = ContentView.lowerOptions.count
+        var poolSize = lowerOptions.count
         
         if withCapital {
             poolSize += upperOptions.count
