@@ -166,6 +166,25 @@ struct ContentView: View {
         
     }
     
+    func calculatePoolSize() -> Int {
+        
+        var poolSize = ContentView.lowerOptions.count
+        
+        if withCapital {
+            poolSize += upperOptions.count
+        }
+        
+        if withNumbers {
+            poolSize += numberOptions.count
+        }
+        
+        if withSymbols {
+            poolSize += specialOptions.count
+        }
+        
+        return poolSize
+    }
+    
 }
 
 #Preview {
