@@ -89,19 +89,23 @@ struct ContentView: View {
                     passwordLength = value
                     lengthText = String(value)
                     generatedPassword = generatePassword()
+                    currentEntropy = calculateEntropy()
                     }
             
             VStack(alignment: .leading){
                 Toggle("Capital Letters", isOn: capitalBinding).onChange(of: withCapital) {
                     oldValue, newValue in generatedPassword = generatePassword()
+                    currentEntropy = calculateEntropy()
                 }
                 
                 Toggle("Numbers", isOn: numbersBinding).onChange(of: withNumbers) {
                     oldValue, newValue in generatedPassword = generatePassword()
+                    currentEntropy = calculateEntropy()
                 }
                 
                 Toggle("Symbols", isOn: symbolsBinding).onChange(of: withSymbols) {
                     oldValue, newValue in generatedPassword = generatePassword()
+                    currentEntropy = calculateEntropy()
                 }
             }
             .padding()
@@ -127,12 +131,14 @@ struct ContentView: View {
                 
                 Button("Regenerate") {
                     generatedPassword = generatePassword()
+                    currentEntropy = calculateEntropy()
                 }
             }
         }
         .padding()
         .onAppear() {
             generatedPassword = generatePassword()
+            currentEntropy = calculateEntropy()
         }
     }
     
@@ -208,7 +214,7 @@ struct ContentView: View {
     
     func strengthLabel() -> String {
         
-        let entropy = calculateEntropy()
+        let entropy = currentEntropy
         var strength = ""
         
         if entropy <= 40 {
@@ -225,7 +231,8 @@ struct ContentView: View {
     }
     
     func strengthPercentage() -> Double {
-        let entropy = calculateEntropy()
+        
+        let entropy = currentEntropy
         
         let percentage = min((entropy / 100) * 100,100)
         
