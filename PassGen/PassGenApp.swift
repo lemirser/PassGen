@@ -10,7 +10,7 @@ import SwiftUI
 @main
 struct PassGenApp: App {
     var body: some Scene {
-        MenuBarExtra("PassGen") {
+        MenuBarExtra("PassGen", systemImage: "key.fill") {
             ContentView()
         }.menuBarExtraStyle(.window)
     }
