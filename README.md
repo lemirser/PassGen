@@ -42,7 +42,7 @@ Once running, look for the PassGen icon in your menu bar to open the password ge
 
 ## Roadmap
 
-- [ ] Custom app icon
+- [x] Custom app icon
 - [ ] App Store preparation (developer account, screenshots, listing)
 - [ ] Additional polish and accessibility pass
 
