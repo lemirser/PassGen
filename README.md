@@ -19,7 +19,7 @@ PassGen lives quietly in your menu bar, no Dock icon, no clutter, and gives you 
 
 ## Requirements
 
-- macOS Ventura (13.0) or later
+- macOS Ventura (14.0) or later
 - Xcode 15 or later (to build from source)
 
 ## Getting Started
