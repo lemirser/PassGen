@@ -127,11 +127,13 @@ struct ContentView: View {
                             NSPasteboard.general.clearContents()
                         }
                     }
+                    AccessibilityNotification.Announcement("Password copied to clipboard, password strength is \(strengthLabel()).").post()
                 }
                 
                 Button("Regenerate") {
                     generatedPassword = generatePassword()
                     currentEntropy = calculateEntropy()
+                    AccessibilityNotification.Announcement("New password generated, new password strength is \(strengthLabel()).").post()
                 }
             }
         }
