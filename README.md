@@ -44,7 +44,8 @@ Once running, look for the PassGen icon in your menu bar to open the password ge
 
 - [x] Custom app icon
 - [ ] App Store preparation (developer account, screenshots, listing)
-- [ ] Additional polish and accessibility pass
+- [x] Accessibility pass (VoiceOver, color contrast, Dynamic Type reviewed)
+- [ ] Additional polish
 
 ## License
 
