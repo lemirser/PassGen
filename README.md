@@ -45,7 +45,12 @@ Once running, look for the PassGen icon in your menu bar to open the password ge
 - [x] Custom app icon
 - [ ] App Store preparation (developer account, screenshots, listing)
 - [x] Accessibility pass (VoiceOver, color contrast, Dynamic Type reviewed)
+- [ ] Menu bar autohide window positioning fix (deferred, requires AppKit rewrite, see Known Limitations)
 - [ ] Additional polish
+
+## Known Limitations
+
+- **Menu bar autohide overlap**: If macOS's "Automatically hide and show the menu bar" setting is enabled, the PassGen panel may visually overlap with the menu bar when it reappears on hover, specifically after the panel resizes due to a longer generated password. This is a limitation of SwiftUI's `MenuBarExtra` window positioning, which doesn't currently expose control over the window's screen anchor point. Not present when the menu bar is set to always show (the macOS default).
 
 ## License
 
