@@ -305,6 +305,14 @@ struct ContentView: View {
         return result
     }
     
+    func lineCount() -> Int {
+        let allChunks = formattedPassword()
+        
+        let lineCount = allChunks.split(separator: "\n")
+        
+        return lineCount.count
+    }
+    
 }
 
 #Preview {
