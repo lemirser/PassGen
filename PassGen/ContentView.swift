@@ -138,6 +138,7 @@ struct ContentView: View {
             }
         }
         .padding()
+        .frame(width: 300, height: 269 + CGFloat(lineCount() - 1) * 20)
         .onAppear() {
             generatedPassword = generatePassword()
             currentEntropy = calculateEntropy()
