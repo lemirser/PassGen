@@ -1,0 +1,334 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Architected App Store Listing &amp; Privacy Policy Strategy</title>
+<meta name="description" content="Case note: authoring App Store Connect metadata and a zero-data-collection privacy policy for PassGen, a macOS password generator.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600&family=Source+Serif+4:ital,wght@0,400;0,600;1,400&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --paper: #F1F0EA;
+    --paper-raised: #F8F7F2;
+    --ink: #1E2A22;
+    --ink-soft: #5B6660;
+    --accent: #2F6B4F;
+    --accent-soft: #E4EFE7;
+    --rule: #C9CDC0;
+    --radius: 3px;
+  }
+
+  *{ box-sizing:border-box; }
+
+  html{ scroll-behavior:smooth; }
+
+  body{
+    margin:0;
+    background:var(--paper);
+    color:var(--ink);
+    font-family:'Source Serif 4', Georgia, serif;
+    font-size:17px;
+    line-height:1.65;
+    -webkit-font-smoothing:antialiased;
+  }
+
+  a{ color:var(--accent); }
+
+  .wrap{
+    max-width:840px;
+    margin:0 auto;
+    padding:0 28px;
+  }
+
+  /* ---------- Masthead ---------- */
+
+  header.masthead{
+    padding:72px 0 40px;
+    border-bottom:1px solid var(--rule);
+  }
+
+  .eyebrow{
+    font-family:'IBM Plex Mono', monospace;
+    font-size:12.5px;
+    letter-spacing:0.11em;
+    text-transform:uppercase;
+    color:var(--ink-soft);
+    display:flex;
+    align-items:center;
+    gap:10px;
+    margin-bottom:22px;
+  }
+
+  .eyebrow::before{
+    content:"";
+    width:7px; height:7px;
+    background:var(--accent);
+    display:inline-block;
+    border-radius:1px;
+  }
+
+  h1{
+    font-family:'Fraunces', serif;
+    font-optical-sizing:auto;
+    font-weight:500;
+    font-size:clamp(2.1rem, 4.4vw, 3.05rem);
+    line-height:1.08;
+    letter-spacing:-0.01em;
+    margin:0 0 22px;
+    max-width:15ch;
+  }
+
+  .dek{
+    font-size:1.11rem;
+    color:var(--ink-soft);
+    max-width:52ch;
+    margin:0 0 30px;
+  }
+
+  .meta-row{
+    display:flex;
+    flex-wrap:wrap;
+    gap:26px;
+    font-family:'IBM Plex Mono', monospace;
+    font-size:12.5px;
+    color:var(--ink-soft);
+  }
+
+  .meta-row span b{
+    color:var(--ink);
+    font-weight:500;
+  }
+
+  /* ---------- Stat strip ---------- */
+
+  .stats{
+    display:grid;
+    grid-template-columns:repeat(3, 1fr);
+    border-bottom:1px solid var(--rule);
+  }
+
+  .stat{
+    padding:26px 28px;
+    border-right:1px solid var(--rule);
+  }
+  .stat:last-child{ border-right:none; }
+
+  .stat .num{
+    font-family:'Fraunces', serif;
+    font-weight:500;
+    font-size:1.9rem;
+    color:var(--accent);
+    display:block;
+    line-height:1;
+    margin-bottom:6px;
+  }
+
+  .stat .label{
+    font-family:'IBM Plex Mono', monospace;
+    font-size:11.5px;
+    letter-spacing:0.04em;
+    color:var(--ink-soft);
+  }
+
+  /* ---------- Narrative ---------- */
+
+  .narrative{
+    padding:44px 0 8px;
+    max-width:62ch;
+  }
+
+  .narrative p{ margin:0 0 18px; }
+
+  /* ---------- Ledger ---------- */
+
+  .ledger{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:0;
+    border-top:1px solid var(--rule);
+    border-bottom:1px solid var(--rule);
+    margin:44px 0 48px;
+  }
+
+  .ledger-col{
+    padding:32px 28px 36px;
+  }
+  .ledger-col + .ledger-col{
+    border-left:1px solid var(--rule);
+  }
+
+  .ledger-title{
+    font-family:'IBM Plex Mono', monospace;
+    font-size:11.5px;
+    letter-spacing:0.09em;
+    text-transform:uppercase;
+    color:var(--ink-soft);
+    margin:0 0 20px;
+  }
+
+  .ledger-item{
+    display:flex;
+    gap:12px;
+    padding:12px 0;
+    border-top:1px solid var(--rule);
+  }
+  .ledger-item:first-of-type{ border-top:none; }
+
+  .ledger-item .check{
+    font-family:'IBM Plex Mono', monospace;
+    color:var(--accent);
+    font-size:14px;
+    line-height:1.5;
+    flex-shrink:0;
+  }
+
+  .ledger-item .txt b{
+    display:block;
+    font-family:'Source Serif 4', serif;
+    font-weight:600;
+    font-size:15.5px;
+  }
+
+  .ledger-item .txt span{
+    font-size:14px;
+    color:var(--ink-soft);
+  }
+
+  /* ---------- Footer ---------- */
+
+  footer{
+    padding:0 0 80px;
+  }
+
+  .footer-title{
+    font-family:'IBM Plex Mono', monospace;
+    font-size:11.5px;
+    letter-spacing:0.09em;
+    text-transform:uppercase;
+    color:var(--ink-soft);
+    margin:0 0 16px;
+  }
+
+  .tags{
+    display:flex;
+    flex-wrap:wrap;
+    gap:8px;
+    margin-bottom:34px;
+  }
+
+  .tag{
+    font-family:'IBM Plex Mono', monospace;
+    font-size:12px;
+    background:var(--accent-soft);
+    color:var(--accent);
+    padding:6px 11px;
+    border-radius:var(--radius);
+  }
+
+  .footer-link{
+    display:inline-flex;
+    align-items:center;
+    gap:8px;
+    font-family:'IBM Plex Mono', monospace;
+    font-size:13px;
+    text-decoration:none;
+    border-bottom:1px solid var(--accent);
+    padding-bottom:2px;
+  }
+
+  .footer-link:hover{ opacity:0.75; }
+
+  /* ---------- Responsive ---------- */
+
+  @media (max-width:640px){
+    header.masthead{ padding:52px 0 32px; }
+    .stats{ grid-template-columns:1fr; }
+    .stat{ border-right:none; border-bottom:1px solid var(--rule); }
+    .stat:last-child{ border-bottom:none; }
+    .ledger{ grid-template-columns:1fr; }
+    .ledger-col + .ledger-col{ border-left:none; border-top:1px solid var(--rule); }
+  }
+
+  /* ---------- Focus & motion ---------- */
+
+  a:focus-visible, button:focus-visible{
+    outline:2px solid var(--accent);
+    outline-offset:3px;
+  }
+
+  @media (prefers-reduced-motion: reduce){
+    html{ scroll-behavior:auto; }
+    *{ animation:none !important; transition:none !important; }
+  }
+</style>
+</head>
+<body>
+
+<div class="wrap">
+
+  <header class="masthead">
+    <p class="eyebrow">Case Note &middot; App Store Compliance</p>
+    <h1>Architected App Store listing requirements &amp; privacy policy strategy</h1>
+    <p class="dek">For PassGen, a macOS menu bar password generator: wrote the App Store Connect metadata end to end, then designed and published a privacy policy built around a genuinely simple fact &mdash; the app collects nothing.</p>
+    <div class="meta-row">
+      <span>Project: <b>PassGen</b></span>
+      <span>Platform: <b>macOS</b></span>
+      <span>Status: <b>Live</b></span>
+    </div>
+  </header>
+
+  <section class="stats">
+    <div class="stat">
+      <span class="num">0</span>
+      <span class="label">DATA POINTS COLLECTED</span>
+    </div>
+    <div class="stat">
+      <span class="num">90s</span>
+      <span class="label">CLIPBOARD AUTO&#8209;CLEAR WINDOW</span>
+    </div>
+    <div class="stat">
+      <span class="num">$0</span>
+      <span class="label">POLICY HOSTING COST</span>
+    </div>
+  </section>
+
+  <section class="narrative">
+    <p>App Store submission needs more than a working build. Every listing field &mdash; name, subtitle, description, keywords, category &mdash; has a character limit and a job to do, and every app needs a privacy policy Apple can link to, whether or not it touches user data.</p>
+    <p>PassGen doesn't touch user data. No accounts, no network calls, no analytics. That made the privacy policy less about disclosure and more about stating a fact clearly: passwords are generated on-device, copied to the system clipboard like any other copy action, and cleared automatically after 90 seconds &mdash; but only if the clipboard still holds that exact password, so it never wipes out something else the person copied since.</p>
+  </section>
+
+  <section class="ledger">
+    <div class="ledger-col">
+      <p class="ledger-title">Listing Requirements</p>
+      <div class="ledger-item"><span class="check">&#10003;</span><span class="txt"><b>Name &amp; subtitle</b><span>Within Apple's 30-character subtitle limit</span></span></div>
+      <div class="ledger-item"><span class="check">&#10003;</span><span class="txt"><b>Description copy</b><span>Feature-led, written for the App Store page</span></span></div>
+      <div class="ledger-item"><span class="check">&#10003;</span><span class="txt"><b>Keywords</b><span>Fit to the 100-character field limit</span></span></div>
+      <div class="ledger-item"><span class="check">&#10003;</span><span class="txt"><b>Category</b><span>Utilities</span></span></div>
+      <div class="ledger-item"><span class="check">&#10003;</span><span class="txt"><b>Age rating &amp; copyright</b><span>Set for submission</span></span></div>
+    </div>
+    <div class="ledger-col">
+      <p class="ledger-title">Privacy Strategy</p>
+      <div class="ledger-item"><span class="check">&#10003;</span><span class="txt"><b>Zero data collection</b><span>Stated plainly, not buried in legal language</span></span></div>
+      <div class="ledger-item"><span class="check">&#10003;</span><span class="txt"><b>Clipboard handling disclosed</b><span>Explains the 90-second auto-clear safeguard</span></span></div>
+      <div class="ledger-item"><span class="check">&#10003;</span><span class="txt"><b>No third-party tracking</b><span>No analytics or ad SDKs to disclose</span></span></div>
+      <div class="ledger-item"><span class="check">&#10003;</span><span class="txt"><b>Published &amp; linkable</b><span>Live at a public URL for App Store Connect</span></span></div>
+    </div>
+  </section>
+
+  <footer>
+    <p class="footer-title">Built with</p>
+    <div class="tags">
+      <span class="tag">App Store Connect</span>
+      <span class="tag">Privacy Policy Drafting</span>
+      <span class="tag">GitHub Pages</span>
+      <span class="tag">Swift / SwiftUI</span>
+    </div>
+    <a class="footer-link" href="privacy.html">Read the live privacy policy &rarr;</a>
+  </footer>
+
+</div>
+
+</body>
+</html>
