@@ -40,6 +40,10 @@ Once running, look for the PassGen icon in your menu bar to open the password ge
 - **Strength scoring**: entropy is calculated once per password change (not on every screen redraw) and cached, then reused by the strength label, color, and progress bar to avoid redundant calculation.
 - **Clipboard security**: copying starts a 90-second timer that clears the clipboard, but only if it still holds the exact password that was copied, protecting against accidentally erasing unrelated clipboard content.
 
+## Support
+
+Found a bug or have a question? Open an issue on this repository, or reach out directly at lserzo@proton.me.
+
 ## Roadmap
 
 - [x] Custom app icon
