@@ -28,6 +28,8 @@ struct ContentView: View {
     
     @State private var currentEntropy: Double = 0
     
+    let url_ = URL(string:"https://lemirser.github.io/PassGen/privacy.html")!
+    
     var capitalBinding: Binding<Bool> {
         Binding(
             get:{withCapital},
@@ -136,9 +138,16 @@ struct ContentView: View {
                     AccessibilityNotification.Announcement("New password generated, new password strength is \(strengthLabel()).").post()
                 }
             }
+            
+            HStack(){
+                Link("Privacy", destination: url_)
+                    .font(.headline)
+                    .foregroundStyle(.blue)
+            }.padding()
+            
         }
         .padding()
-        .frame(width: 300, height: 269 + CGFloat(lineCount() - 1) * 20)
+        .frame(width: 300, height: 320 + CGFloat(lineCount() - 1) * 20)
         .onAppear() {
             generatedPassword = generatePassword()
             currentEntropy = calculateEntropy()
